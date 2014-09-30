@@ -38,7 +38,6 @@ module ActiveAdmin
           :data => {
             :select2 => {
               :placeholder => I18n.t('active_admin.any'),
-              :allowClear => true,
               :ajax => {
                 :url => options[:select2][:url]
               },

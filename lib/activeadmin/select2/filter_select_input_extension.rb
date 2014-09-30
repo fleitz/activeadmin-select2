@@ -8,8 +8,7 @@ module ActiveAdmin
             :class => 'select2-input',
             :data => {
               :select2 => {
-                :placeholder => I18n.t('active_admin.any'),
-                :allowClear => true
+                :placeholder => I18n.t('active_admin.any')
               }
             }
           }
