@@ -11,7 +11,7 @@ module Formtastic
             :select2 => {
               :placeholder => 'Select',
               :ajax => {
-                :url => options[:select2][:url]
+                :url => (url = options[:select2][:url]).is_a?(Proc) ? url.call : url
               },
               :init => init_value
             }

@@ -39,7 +39,7 @@ module ActiveAdmin
             :select2 => {
               :placeholder => I18n.t('active_admin.any'),
               :ajax => {
-                :url => options[:select2][:url]
+                :url => (url = options[:select2][:url]).is_a?(Proc) ? url.call : url
               },
               :init => value ? options[:select2][:object_for].call(value) : nil
             }

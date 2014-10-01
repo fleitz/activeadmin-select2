@@ -146,6 +146,8 @@ ActiveAdmin.register App do
   filter :user_id, label: 'Owner', as: :select2_ajax, select2: {
     # endpoint
     url: '/admin/users/search',
+    # or as a proc
+    # url: ->{ Rails.application.routes.url_helpers.search_admin_users_path },
     
     # proc that converts id to result
     object_for: ->(id) do
