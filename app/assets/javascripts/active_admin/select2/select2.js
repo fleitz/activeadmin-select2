@@ -25,7 +25,8 @@ $(function() {
         };
       }
 
-      if (item.attr('multiple') && !item.is('select')) {
+      var multiple = item.attr('multiple') && !item.is('select');
+      if (multiple) {
         options.multiple = true;
 
         item.on('change', function(e) {
@@ -38,7 +39,10 @@ $(function() {
       // because select2 reads from input.data to check if it is select2 already
       item.data('select2', null);
       item.select2(options);
-      createFakeInputs(item);
+
+      if (multiple) {
+        createFakeInputs(item);
+      }
     })
   }
 
