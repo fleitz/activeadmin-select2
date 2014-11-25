@@ -33,15 +33,15 @@ module ActiveAdmin
 
       def input_html_options
         {
-          :type => 'hidden',
-          :class => 'select2-input',
-          :data => {
-            :select2 => {
-              :placeholder => I18n.t('active_admin.any'),
-              :ajax => {
-                :url => (url = options[:select2][:url]).is_a?(Proc) ? url.call : url
+          type: 'hidden',
+          class: 'select2-input',
+          data: {
+            select2: {
+              placeholder: I18n.t('active_admin.any'),
+              ajax: {
+                url: (url = options[:select2][:url]).is_a?(Proc) ? url.call : url
               },
-              :init => value ? options[:select2][:object_for].call(value) : nil
+              init: value ? options[:select2][:object_for].call(value) : nil
             }
           }
         }.merge(super)

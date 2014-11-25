@@ -4,24 +4,29 @@ module Formtastic
     class Select2AjaxInput < Formtastic::Inputs::StringInput
       def input_html_options
         {
-          :type => 'hidden',
-          :class => 'select2-input',
-          :value => options[:select2][:value],
-          :data => {
-            :select2 => {
-              :placeholder => 'Select',
-              :ajax => {
-                :url => (url = options[:select2][:url]).is_a?(Proc) ? url.call : url
+          name: "ui_#{object_name}[#{method}]" + (multiple ? '[]' : ''),
+          type: 'hidden',
+          class: 'select2-input',
+          value: options[:select2][:value],
+          data: {
+            select2: {
+              placeholder: 'Select',
+              ajax: {
+                url: (url = options[:select2][:url]).is_a?(Proc) ? url.call : url
               },
-              :init => init_value
+              init: init_value
             }
           },
-          :multiple => options[:select2][:multiple]
+          multiple: multiple
         }.merge(super)
       end
 
 
       private
+
+      def multiple
+        options[:select2][:multiple]
+      end
 
       def init_value
         return options[:select2][:init] if options[:select2][:init]

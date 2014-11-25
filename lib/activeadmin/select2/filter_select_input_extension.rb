@@ -5,10 +5,10 @@ module ActiveAdmin
 
         def extra_input_html_options
           {
-            :class => 'select2-input',
-            :data => {
-              :select2 => {
-                :placeholder => I18n.t('active_admin.any')
+            class: 'select2-input',
+            data: {
+              select2: {
+                placeholder: I18n.t('active_admin.any')
               }
             }
           }

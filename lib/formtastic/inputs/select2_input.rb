@@ -4,7 +4,7 @@ module Formtastic
     class Select2Input < Formtastic::Inputs::SelectInput
       def extra_input_html_options
         {
-          :class => 'select2-input'
+          class: 'select2-input'
         }
       end
     end

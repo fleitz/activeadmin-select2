@@ -28,33 +28,35 @@ $(function() {
       var multiple = item.attr('multiple') && !item.is('select');
       if (multiple) {
         options.multiple = true;
-
-        item.on('change', function(e) {
-          createFakeInputs(item);
-        });
       }
 
       options.dropdownCssClass = options.dropdownCssClass || 'bigdrop';
 
       // because select2 reads from input.data to check if it is select2 already
       item.data('select2', null);
+
       item.select2(options);
 
-      if (multiple) {
-        createFakeInputs(item);
+      if (multiple || options.tags) {
+        createHiddenInputs(item);
+        item.on('change', function(e) {
+          createHiddenInputs(item);
+        });
       }
     })
   }
 
-  var createFakeInputs = function(item) {
+  // select2 stores the value as `value="one,two,three"` on the text input
+  // since we need to send an array to the server, create hidden fields for the values
+  var createHiddenInputs = function(item) {
     var values = item.select2('val');
     var id = item.attr('id');
-    var name = item.attr('name');
-    $('.fake_' + id).remove();
-    for (var i = 1; i < values.length; i++) {
+    var name = item.attr('name').replace(/^ui_/, '');
+    $('.hidden_' + id).remove();
+    for (var i = 0; i < values.length; i++) {
       var value = values[i];
-      var fakeId = 'fake_' + id + '_' + (i+1);
-      item.append('<input type="hidden" id="' + fakeId + '" class="fake_' + id + '" name="' + name + '" value="' + value + '" />');
+      var hiddenId = 'hidden_' + id + '_' + (i+1);
+      item.append('<input type="hidden" id="' + hiddenId + '" class="hidden_' + id + '" name="' + name + '" value="' + value + '" />');
     }
   };
 

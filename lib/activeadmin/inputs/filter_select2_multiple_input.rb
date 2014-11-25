@@ -10,7 +10,8 @@ module ActiveAdmin
 
       def extra_input_html_options
         {
-          :class => 'select2-input', :multiple => true
+          class: 'select2-input',
+          multiple: true
         }
       end
 
