@@ -4,7 +4,7 @@ module Formtastic
     class Select2AjaxInput < Formtastic::Inputs::StringInput
       def input_html_options
         {
-          name: "ui_#{object_name}[#{method}]" + (multiple ? '[]' : ''),
+          name: "#{multiple ? 'ui_' : ''}#{object_name}[#{method}]" + (multiple ? '[]' : ''),
           type: 'hidden',
           class: 'select2-input',
           value: options[:select2][:value],
