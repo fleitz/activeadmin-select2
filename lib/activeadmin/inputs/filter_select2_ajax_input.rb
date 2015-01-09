@@ -2,7 +2,7 @@ module ActiveAdmin
   module Inputs
     class FilterSelect2AjaxInput < Formtastic::Inputs::StringInput
 
-      include FilterBase
+      include ActiveAdmin::Inputs::Filters::Base
 
       def to_html
         input_wrapping do
