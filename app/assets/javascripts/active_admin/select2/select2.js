@@ -53,10 +53,15 @@ $(function() {
     var id = item.attr('id');
     var name = item.attr('name').replace(/^ui_/, '');
     $('.hidden_' + id).remove();
-    for (var i = 0; i < values.length; i++) {
-      var value = values[i];
-      var hiddenId = 'hidden_' + id + '_' + (i+1);
-      item.append('<input type="hidden" id="' + hiddenId + '" class="hidden_' + id + '" name="' + name + '" value="' + value + '" />');
+
+    if (values.length === 0) {
+      item.append('<input type="hidden" class="hidden_' + id + '" name="' + name + '" />');
+    } else {
+      for (var i = 0; i < values.length; i++) {
+        var value = values[i];
+        var hiddenId = 'hidden_' + id + '_' + (i+1);
+        item.append('<input type="hidden" id="' + hiddenId + '" class="hidden_' + id + '" name="' + name + '" value="' + value + '" />');
+      }
     }
   };
 
