@@ -34,7 +34,7 @@ initSelect2 = (inputs, extra = {}) ->
         callback(options.init)
 
     # multiple
-     multiple = item.attr('multiple') && !item.is('select');
+    multiple = item.attr('multiple') && !item.is('select');
     if multiple
       options.multiple = true
 
