@@ -22,6 +22,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activeadmin'
   spec.add_runtime_dependency 'jquery-rails'
-  spec.add_runtime_dependency 'select2-rails'
+  spec.add_runtime_dependency 'select2-rails', '~> 4.0'
 
 end

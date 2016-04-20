@@ -2,22 +2,19 @@
 
 # select2 stores the value as `value="one,two,three"` on the text input
 # since we need to send an array to the server, create hidden fields for the values
-createHiddenInputs = (item)  ->
-  values = item.select2('val')
+createSelectedOptionTags = (item)  ->
+  values = item.val()
   id = item.attr('id')
-  name = item.attr('name').replace(/^ui_/, '')
-  $('.hidden_' + id).remove()
+  item.empty()
 
-  if values.length == 0
-    item.append('<input type="hidden" class="hidden_' + id + '" name="' + name + '" />')
-  else
-    for value, i in values
-      hiddenId = 'hidden_' + id + '_' + (i+1)
-      item.append('<input type="hidden" id="' + hiddenId + '" class="hidden_' + id + '" name="' + name + '" value="' + value + '" />')
+  for value, i in values
+    optionId = 'option_' + id + '_' + (i+1)
+    item.append('<option id="' + optionId + '" class="option_' + id + '" value="' + value + '" selected="selected" >'+value+'</option>')
 
 
 initSelect2 = (inputs, extra = {}) ->
   inputs.each ->
+
     item = $(this)
     # reading from data allows <input data-select2='{"tags": ['some']}'> to be passed to select2
     options = $.extend(allowClear: true, extra, item.data('select2'))
@@ -26,12 +23,10 @@ initSelect2 = (inputs, extra = {}) ->
     if options.ajax
       options.ajax.dataType = options.ajax.dataType || 'json'
       options.minimumInputLength = options.minimumInputLength || 1
-      options.ajax.data = (term, page) ->
-        return { term: term, page: page, per: 10 }
-      options.ajax.results = (response, page) ->
+      options.ajax.data = (params) ->
+        return { term: params.term, page: params.page, per: 10 }
+      options.ajax.processResults = (response) ->
         return { results: response.data }
-      options.initSelection = (el, callback) ->
-        callback(options.init)
 
     # multiple
     multiple = item.attr('multiple') && !item.is('select');
@@ -47,9 +42,9 @@ initSelect2 = (inputs, extra = {}) ->
 
     # multiple || tags
     if multiple || options.tags
-      createHiddenInputs(item)
+      createSelectedOptionTags(item)
       item.on 'change', (e) ->
-        createHiddenInputs(item)
+        createSelectedOptionTags(item)
 
 $(document).on 'has_many_add:after', '.has_many_container', (e, fieldset) ->
   initSelect2(fieldset.find('.select2-input'))
