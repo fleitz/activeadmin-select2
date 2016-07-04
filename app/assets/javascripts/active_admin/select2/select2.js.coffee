@@ -16,9 +16,9 @@ initSelect2 = (inputs, extra = {}) ->
   inputs.each ->
 
     item = $(this)
-    if item.attr('activeadmin-select2') == 'true'
-      return
-    item.attr('activeadmin-select2','true')
+    #if item.attr('activeadmin-select2') == 'true'
+    #  return
+    #item.attr('activeadmin-select2','true')
     # reading from data allows <input data-select2='{"tags": ['some']}'> to be passed to select2
     options = $.extend(allowClear: true, extra, item.data('select2'))
 
