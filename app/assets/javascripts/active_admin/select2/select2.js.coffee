@@ -16,6 +16,9 @@ initSelect2 = (inputs, extra = {}) ->
   inputs.each ->
 
     item = $(this)
+    if item.data('activeadmin-select2')
+      return
+    item.data('activeadmin-select2',true)
     # reading from data allows <input data-select2='{"tags": ['some']}'> to be passed to select2
     options = $.extend(allowClear: true, extra, item.data('select2'))
 
@@ -37,8 +40,9 @@ initSelect2 = (inputs, extra = {}) ->
     options.dropdownCssClass = options.dropdownCssClass || 'bigdrop'
 
     # because select2 reads from input.data to check if it is select2 already
-    # fix for tubolinks item.data('select2', null)
+    item.data('select2',null)
     item.select2(options)
+    
 
     # multiple || tags
     if multiple || options.tags
