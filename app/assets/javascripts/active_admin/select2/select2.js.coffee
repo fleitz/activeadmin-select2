@@ -17,7 +17,6 @@ initSelect2 = (inputs, extra = {}) ->
 
     item = $(this)
     if item.attr('activeadmin-select2') == 'true'
-      debugger;
       return
     item.attr('activeadmin-select2','true')
     # reading from data allows <input data-select2='{"tags": ['some']}'> to be passed to select2
