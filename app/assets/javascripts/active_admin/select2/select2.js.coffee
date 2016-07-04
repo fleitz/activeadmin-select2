@@ -37,7 +37,7 @@ initSelect2 = (inputs, extra = {}) ->
     options.dropdownCssClass = options.dropdownCssClass || 'bigdrop'
 
     # because select2 reads from input.data to check if it is select2 already
-    item.data('select2', null)
+    # fix for tubolinks item.data('select2', null)
     item.select2(options)
 
     # multiple || tags
