@@ -42,7 +42,7 @@ initSelect2 = (inputs, extra = {}) ->
     # because select2 reads from input.data to check if it is select2 already
     item.data('select2',null)
     item.select2(options)
-    debugger;
+    
 
     
 
